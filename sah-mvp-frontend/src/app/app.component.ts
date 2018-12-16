@@ -14,30 +14,38 @@ export class AppComponent implements OnInit{
 
   page:number = 1;
   total: number = 0;
+  sortBy: string = "id";
+  direction: string = "asc";
   data$: any;
 
-  constructor(private repository: PropertyRepository) {
-
-  }
+  constructor(private repository: PropertyRepository) {}
 
   ngOnInit() {
     this.get();
   }
 
-  get(page: number = 1, sortBy: string = "id", direction: string = "asc") {
-    this.data$ = this.repository.getProperties(page, sortBy, direction).pipe(
+  pageChanged({pageIndex}) {
+    this.page = pageIndex;
+    this.get();
+  }
+
+  get() {
+    this.data$ = this.repository.getProperties(this.page, this.sortBy, this.direction).pipe(
       tap((response) => {
-        this.page = page;
-        console.log('response is', response);
+        this.total = response['numberOfElements'];
       })
     );
   }
 
   sort({ active, direction }) {
     if (!active || direction === '') {
-      this.get();
-    } else  {
-      this.get(this.page, active, direction);
+      this.sortBy = 'id';
+      this.direction = 'asc';
+    } else {
+      this.sortBy = active;
+      this.direction = direction;
     }
+
+    this.get();
   }
 }
