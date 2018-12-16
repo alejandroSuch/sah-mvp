@@ -1,9 +1,6 @@
 const unirest = require('unirest');
 const parseString = require('xml2js').parseString;
 
-const API_URL = process.env.API_URL;
-//''
-
 unirest
     .get('http://feeds.spotahome.com/trovit-Ireland.xml')
     .end(({ body }) => {
