@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-content>
+    <table matSort (matSortChange)="sort($event)" cellspacing="0">
+      <tr>
+        <th mat-sort-header="id">#</th>
+        <th mat-sort-header="title">Title</th>
+        <th mat-sort-header="city">City</th>
+        <th mat-sort-header="mainPicture">Picture</th>
+      </tr>
+
+      <tbody *ngIf="(data$ | async) as data">
+        <tr *ngFor="let property of data.elements">
+          <td><a [href]="property.link" target="_blank">{{property.id}}</a></td>
+          <td>{{property.title}}</td>
+          <td>{{property.city}}</td>
+          <td><img [src]="property.mainPicture"/></td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+
