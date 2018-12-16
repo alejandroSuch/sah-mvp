@@ -10,10 +10,10 @@ git clone https://github.com/alejandroSuch/sah-mvp.git
 
 In order to run, you must have Docker and `docker-compose` command. You also need to have the permissions to deploy dockerized apps on port 80.
 
-Launch:
+Launch this command inside `sah-mvp` directory:
 
 ```
-docker-compose up --build
+sh run.sh
 ```
 
 And then navigate to http://localhost.
