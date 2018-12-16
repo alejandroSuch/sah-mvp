@@ -42,7 +42,6 @@ services:
     container_name: sah_mvp_initializer
     environment:
       - API_URL=http://sah-mvp-api:8081/properties
-    entrypoint: sh -c "dockerize -wait http://sah-mvp-api:8081 -timeout 600s && node index.js"
+    entrypoint: sh -c "dockerize -wait http://sah-mvp-api:8081/properties -timeout 600s && node index.js"
     depends_on:
-      - proxy
       - sah-mvp-api
