@@ -1,39 +1,15 @@
 <sah-toolbar></sah-toolbar>
-<mat-card>
-  <mat-card-content *ngIf="(data$ | async) as data">
 
-    <mat-list>
-      <mat-list-item *ngFor="let property of data.elements">
-        <img matListAvatar [src]="property.mainPicture" [alt]="property.title">
-        <h3 matLine> {{property.title}} </h3>
-        <p class="city" matLine>{{property.city}}</p>
-        <p>
-          <a [href]="property.link" target="_blank">{{property.id}}</a>
-        </p>
-      </mat-list-item>
-    </mat-list>
-
-    <!-- <table matSort (matSortChange)="sort($event)" cellspacing="0">
-      <tr>
-        <th mat-sort-header="id">#</th>
-        <th mat-sort-header="title">Title</th>
-        <th mat-sort-header="city">City</th>
-        <th mat-sort-header="mainPicture">Picture</th>
-      </tr>
-
-      <tbody *ngIf="(data$ | async) as data">
-        <tr *ngFor="let property of data.elements">
-          <td><a [href]="property.link" target="_blank">{{property.id}}</a></td>
-          <td>{{property.title}}</td>
-          <td>{{property.city}}</td>
-          <td><img [src]="property.mainPicture"/></td>
-        </tr>
-      </tbody>
-    </table> -->
-
-    <mat-paginator [length]="total" [pageSize]="25" [pageIndex]="page" (page)="pageChanged($event)">
-</mat-paginator>
-  </mat-card-content>
-</mat-card>
-
-
+<ng-container *ngIf="(data$ | async) as data">
+  <mat-list>
+    <mat-list-item *ngFor="let property of data.elements" [title]="property.title">
+      <img matListAvatar [src]="property.mainPicture" [alt]="property.title">
+      <h3 matLine> {{property.title}} </h3>
+      <p class="city" matLine>{{property.city}}</p>
+      <p>
+        <a [href]="property.link" target="_blank">{{property.id}}</a>
+      </p>
+    </mat-list-item>
+  </mat-list>
+  <mat-paginator [length]="total" [pageSize]="25" [pageIndex]="page" (page)="pageChanged($event)"></mat-paginator>
+</ng-container>

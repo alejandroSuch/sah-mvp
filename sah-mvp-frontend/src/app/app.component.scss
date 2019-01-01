@@ -1,8 +1,5 @@
-mat-card {
-  max-width: 720px;
-  margin: 0 auto;
-  margin-top: 64px;
-  margin-bottom: 64px;
+mat-list-item {
+  border-bottom: 1px solid rgba(0,0,0,.12);
 
   p.city {
     color: rgba(0, 0, 0, 0.54);
