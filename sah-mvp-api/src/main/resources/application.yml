@@ -3,5 +3,7 @@ spring:
     active: development
   application:
     name: sah-mvp-command
+  jpa:
+    show-sql: true
 server:
   port: 8081

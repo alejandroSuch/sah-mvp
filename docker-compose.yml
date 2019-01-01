@@ -1,13 +1,5 @@
 version: '3'
 services:
-  mysql:
-    image: mysql:8
-    container_name: sah_mvp_mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=sah-mvp
-      - MYSQL_DATABASE=sah-mvp
-    ports:
-      - "3306:3306"
   sah-mvp-api:
     build:
       context: ./sah-mvp-api
@@ -15,11 +7,7 @@ services:
     container_name: sah_mvp_api
     environment:
       - SPRING_PROFILES_ACTIVE=production
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/sah-mvp
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=sah-mvp
-    depends_on:
-      - mysql
+      - SPRING_JPA_SHOW_SQL=false
   sah-mvp-frontend:
     build:
       context: ./sah-mvp-frontend
