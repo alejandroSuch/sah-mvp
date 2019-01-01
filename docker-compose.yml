@@ -30,6 +30,8 @@ services:
     container_name: sah_mvp_initializer
     environment:
       - API_URL=http://sah-mvp-api:8081/properties
+      - FEED_URL=http://feeds.spotahome.com/trovit-Ireland.xml
+      - LOCATION=trovit
     entrypoint: sh -c "dockerize -wait http://sah-mvp-api:8081/properties -timeout 600s && node index.js"
     depends_on:
       - sah-mvp-api
