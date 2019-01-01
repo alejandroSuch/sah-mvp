@@ -3,13 +3,8 @@ mat-card {
   margin: 0 auto;
   margin-top: 64px;
   margin-bottom: 64px;
-}
 
-tr {
-  img {
-    max-width: 200px;
-  }
-  td {
-    border-bottom: 1px solid #ededed;
+  p.city {
+    color: rgba(0, 0, 0, 0.54);
   }
 }
