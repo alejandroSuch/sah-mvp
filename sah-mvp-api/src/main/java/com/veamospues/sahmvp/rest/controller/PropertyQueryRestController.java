@@ -38,7 +38,7 @@ public class PropertyQueryRestController {
     //@formatter:off
     return FindAllPropertiesPaginatedQueryRequest
       .builder()
-        .page(isNull(page) ? 1 : page)
+        .page(isNull(page) ? 0 : page)
         .sortBy(isNull(sortBy) ? DEFAULT_SORT_BY : sortBy)
         .direction(isNull(direction) ? DEFAULT_SORT_DIRECTION : direction)
       .build();

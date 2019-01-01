@@ -12,7 +12,7 @@ import {tap} from 'rxjs/operators';
 export class AppComponent implements OnInit{
   loading: boolean = false;
 
-  page:number = 1;
+  page:number = 0;
   total: number = 0;
   sortBy: string = "id";
   direction: string = "asc";
