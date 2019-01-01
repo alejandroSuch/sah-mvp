@@ -1,15 +1,16 @@
-<sah-toolbar></sah-toolbar>
-
-<ng-container *ngIf="(data$ | async) as data">
-  <mat-list>
-    <mat-list-item *ngFor="let property of data.elements" [title]="property.title">
-      <img matListAvatar [src]="property.mainPicture" [alt]="property.title">
-      <h3 matLine> {{property.title}} </h3>
-      <p class="city" matLine>{{property.city}}</p>
-      <p>
-        <a [href]="property.link" target="_blank">{{property.id}}</a>
-      </p>
-    </mat-list-item>
-  </mat-list>
-  <mat-paginator [length]="total" [pageSize]="25" [pageIndex]="page" (page)="pageChanged($event)"></mat-paginator>
-</ng-container>
+<div fxLayout="column" class="container">
+  <sah-toolbar></sah-toolbar>
+  <ng-container *ngIf="(data$ | async) as data">
+    <mat-list fxFlex="1 1 auto">
+      <mat-list-item *ngFor="let property of data.elements" [title]="property.title">
+        <img matListAvatar [src]="property.mainPicture" [alt]="property.title">
+        <h3 matLine> {{property.title}} </h3>
+        <p class="city" matLine>{{property.city}}</p>
+        <p>
+          <a [href]="property.link" target="_blank">{{property.id}}</a>
+        </p>
+      </mat-list-item>
+    </mat-list>
+    <mat-paginator [length]="total" [pageSize]="25" [pageIndex]="page" (page)="pageChanged($event)"></mat-paginator>
+  </ng-container>
+</div>

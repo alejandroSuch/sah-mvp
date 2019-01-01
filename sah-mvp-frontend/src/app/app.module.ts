@@ -8,6 +8,8 @@ import { environment } from './../environments/environment';
 import { PROPERTIES_URL } from './injection-tokens';
 import { MaterialModule } from './material.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: PROPERTIES_URL, useValue: environment.propertiesUrl }
