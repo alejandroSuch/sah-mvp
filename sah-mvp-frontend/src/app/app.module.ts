@@ -7,10 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from './../environments/environment';
 import { PROPERTIES_URL } from './injection-tokens';
 import { MaterialModule } from './material.module';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
