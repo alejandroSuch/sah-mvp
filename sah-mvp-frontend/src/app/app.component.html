@@ -1,5 +1,6 @@
 <div fxLayout="column" class="container">
   <sah-toolbar></sah-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
   <ng-container *ngIf="(data$ | async) as data">
     <mat-list fxFlex="1 1 auto">
       <mat-list-item *ngFor="let property of data.elements" [title]="property.title">

@@ -30,9 +30,13 @@ export class AppComponent implements OnInit{
   }
 
   get() {
+    this.loading = true;
     this.data$ = this.repository.getProperties(this.page, this.sortBy, this.direction).pipe(
       tap((response) => {
         this.total = response['numberOfElements'];
+      }),
+      tap(() => {
+        this.loading = false;
       })
     );
   }
