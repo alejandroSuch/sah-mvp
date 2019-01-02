@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="mat-elevation-z2">
+  <mat-toolbar-row>
+    <span>spot-a-room</span>
+    <span class="spacer"></span>
+    <button *ngIf="showFilterBtn" (click)="handleFilterBtnClick()" mat-icon-button>
+      <mat-icon>sort_by_alpha</mat-icon>
+      <!-- <mat-icon>filter_list</mat-icon> -->
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

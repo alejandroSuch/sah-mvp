@@ -1,0 +1,15 @@
+<h3 class="filter-title">Sort by...</h3>
+<mat-nav-list dense>
+  <mat-list-item (click)="sortBy('id')">
+    <mat-icon matListIcon>{{ iconFor('id') }}</mat-icon>
+    <h3 matLine>ID</h3>
+  </mat-list-item>
+  <mat-list-item (click)="sortBy('city')">
+    <mat-icon matListIcon>{{ iconFor('city') }}</mat-icon>
+    <h3 matLine>City</h3>
+  </mat-list-item>
+  <mat-list-item (click)="sortBy('title')">
+    <mat-icon matListIcon>{{ iconFor('title') }}</mat-icon>
+    <h3 matLine>Title</h3>
+  </mat-list-item>
+</mat-nav-list>

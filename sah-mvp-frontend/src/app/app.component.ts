@@ -1,51 +1,63 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { PropertyRepository } from './property-repository.service';
+import { PropertiesDs } from './properties.ds';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { distinctUntilChanged, map, take, tap } from 'rxjs/operators';
+import { Filter } from './model';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { FilterWrapperComponent } from './filter-wrapper/filter-wrapper.component';
 
-import {tap} from 'rxjs/operators';
+const SMALL_RESOLUTIONS = ['xs', 'sm'];
+const DRAWER_MODE_OVER = 'over';
+const DRAWER_MODE_SIDE = 'side';
 
 @Component({
   selector: 'sah-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
-  loading: boolean = false;
+export class AppComponent implements OnInit {
+  filterOpened: boolean = false;
 
-  page:number = 0;
-  total: number = 0;
-  sortBy: string = "id";
-  direction: string = "asc";
-  data$: any;
+  filter: Filter = {
+    sortBy: 'id',
+    direction: 'asc',
+  };
 
-  constructor(private repository: PropertyRepository) {}
+  isHandset$ = this.mediaObserver.media$.pipe(
+    map((change: MediaChange) => change.mqAlias),
+    distinctUntilChanged(),
+    map((change: string) => SMALL_RESOLUTIONS.includes(change)),
+    tap((isHandset: boolean) => {
+      this.filterOpened = !isHandset;
+    }),
+  );
+
+  mode$ = this.isHandset$.pipe(
+    map((isHandset: boolean) => isHandset ? DRAWER_MODE_OVER : DRAWER_MODE_SIDE),
+  );
+
+  constructor(public ds: PropertiesDs, private mediaObserver: MediaObserver, private bottomSheet: MatBottomSheet) {
+  }
 
   ngOnInit() {
-    this.get();
   }
 
-  pageChanged({pageIndex}) {
-    this.page = pageIndex;
-    this.get();
+  toggleFilter() {
+    const ref: MatBottomSheetRef<FilterWrapperComponent> = this.bottomSheet.open(FilterWrapperComponent, { data: { filter: this.filter } });
+
+    ref.instance.filterChanged
+      .pipe(take(1))
+      .subscribe(
+        (filter: Filter) => {
+          this.bottomSheet.dismiss();
+          this.handleFilterChanged(filter);
+        },
+      );
   }
 
-  get() {
-    this.data$ = this.repository.getProperties(this.page, this.sortBy, this.direction).pipe(
-      tap((response) => {
-        this.total = response['numberOfElements'];
-      })
-    );
-  }
-
-  sort({ active, direction }) {
-    if (!active || direction === '') {
-      this.sortBy = 'id';
-      this.direction = 'asc';
-    } else {
-      this.sortBy = active;
-      this.direction = direction;
-    }
-
-    this.get();
+  handleFilterChanged(filter: Filter) {
+    this.filter = { ...filter };
   }
 }
+

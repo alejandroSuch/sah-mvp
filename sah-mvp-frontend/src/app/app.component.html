@@ -1,26 +1,13 @@
-<mat-card>
-  <mat-card-content>
-    <table matSort (matSortChange)="sort($event)" cellspacing="0">
-      <tr>
-        <th mat-sort-header="id">#</th>
-        <th mat-sort-header="title">Title</th>
-        <th mat-sort-header="city">City</th>
-        <th mat-sort-header="mainPicture">Picture</th>
-      </tr>
+<div fxLayout="column" class="container">
+  <sah-toolbar [showFilterBtn]="isHandset$ | async" (filterBtnClicked)="toggleFilter()"></sah-toolbar>
+  <mat-drawer-container hasBackdrop="false" fxLayout="column" class="container" fxFlex="1 1 auto">
+    <mat-drawer-content fxFlex="1 1 auto" fxLayout="column" class="container">
+      <sah-list [ds]="ds" [filter]="filter" fxFlex="1 1 auto"></sah-list>
+    </mat-drawer-content>
 
-      <tbody *ngIf="(data$ | async) as data">
-        <tr *ngFor="let property of data.elements">
-          <td><a [href]="property.link" target="_blank">{{property.id}}</a></td>
-          <td>{{property.title}}</td>
-          <td>{{property.city}}</td>
-          <td><img [src]="property.mainPicture"/></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <mat-paginator [length]="total" [pageSize]="25" [pageIndex]="page" (page)="pageChanged($event)">
-</mat-paginator>
-  </mat-card-content>
-</mat-card>
-
-
+    <mat-drawer [mode]="mode$ | async" [opened]="filterOpened" position="end" [ngClass.lt-md]="{ full: true }"
+                [ngClass.gt-sm]="{ full: false }">
+      <sah-filter [filter]="filter" (filterChanged)="handleFilterChanged($event)"></sah-filter>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>
