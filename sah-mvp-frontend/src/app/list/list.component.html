@@ -1,0 +1,23 @@
+<mat-list fxFlex="1 1 auto">
+  <cdk-virtual-scroll-viewport class="list-container list-group" itemSize="73" fxFlex="1 1 auto">
+    <div *cdkVirtualFor="let item of ds">
+      <ng-container *ngIf="item; else loading">
+        <mat-list-item>
+          <img matListAvatar [src]="item.mainPicture" [alt]="item.title">
+          <h3 matLine> {{item.title}} </h3>
+          <p class="city" matLine>{{item.city}}</p>
+          <p>
+            <a [href]="item.link" target="_blank">{{item.id}}</a>
+          </p>
+        </mat-list-item>
+      </ng-container>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</mat-list>
+<ng-template #loading>
+  <mat-list-item>
+    <img matListAvatar src="/assets/city.gif" alt="Loading...">
+    <h3 matLine> Loading... </h3>
+    <p class="city" matLine>Please be patient</p>
+  </mat-list-item>
+</ng-template>

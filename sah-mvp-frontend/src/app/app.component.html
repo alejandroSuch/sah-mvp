@@ -2,36 +2,12 @@
   <sah-toolbar [showFilterBtn]="isHandset$ | async" (filterBtnClicked)="toggleFilter()"></sah-toolbar>
   <mat-drawer-container hasBackdrop="false" fxLayout="column" class="container" fxFlex="1 1 auto">
     <mat-drawer-content fxFlex="1 1 auto" fxLayout="column" class="container">
-      <mat-list fxFlex="1 1 auto">
-        <cdk-virtual-scroll-viewport class="list-container list-group" itemSize="73" fxFlex="1 1 auto">
-          <div *cdkVirtualFor="let property of ds">
-            <ng-container *ngIf="property; else loading">
-              <mat-list-item>
-                <img matListAvatar [src]="property.mainPicture" [alt]="property.title">
-                <h3 matLine> {{property.title}} </h3>
-                <p class="city" matLine>{{property.city}}</p>
-                <p>
-                  <a [href]="property.link" target="_blank">{{property.id}}</a>
-                </p>
-              </mat-list-item>
-            </ng-container>
-          </div>
-        </cdk-virtual-scroll-viewport>
-      </mat-list>
-      <ng-template #loading>
-        <mat-list-item>
-          <img matListAvatar src="https://cdn2.dailytrend.mx/media/bi/giphy_27_5.gif" alt="Loading...">
-          <h3 matLine> Loading... </h3>
-          <p class="city" matLine>Please be patient</p>
-        </mat-list-item>
-      </ng-template>
+      <sah-list [ds]="ds" [filter]="filter" fxFlex="1 1 auto"></sah-list>
     </mat-drawer-content>
 
     <mat-drawer [mode]="mode$ | async" [opened]="filterOpened" position="end" [ngClass.lt-md]="{ full: true }"
                 [ngClass.gt-sm]="{ full: false }">
-      <div>
-        Filter form goes here
-      </div>
+      <sah-filter [filter]="filter" (filterChanged)="handleFilterChanged($event)"></sah-filter>
     </mat-drawer>
   </mat-drawer-container>
 </div>

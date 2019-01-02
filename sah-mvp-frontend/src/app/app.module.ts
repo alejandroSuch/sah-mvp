@@ -9,12 +9,20 @@ import { PROPERTIES_URL } from './injection-tokens';
 import { MaterialModule } from './material.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { FilterComponent } from './filter/filter.component';
+import { ListComponent } from './list/list.component';
+import { FilterWrapperComponent } from './filter-wrapper/filter-wrapper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    FilterComponent,
+    ListComponent,
+    FilterWrapperComponent,
+  ],
+  entryComponents: [
+    FilterWrapperComponent
   ],
   imports: [
     BrowserModule,
