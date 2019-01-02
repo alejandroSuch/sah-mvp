@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <span>spot-a-room</span>
     <span class="spacer"></span>
-    <button *ngIf="showFilterBtn" mat-icon-button>
+    <button *ngIf="showFilterBtn" (click)="handleFilterBtnClick()" mat-icon-button>
       <mat-icon>filter_list</mat-icon>
     </button>
   </mat-toolbar-row>

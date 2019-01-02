@@ -8,6 +8,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
 
 
 
@@ -24,7 +26,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    ScrollingModule
+    ScrollingModule,
+    MatSidenavModule
   ]
 })
 export class MaterialModule {}
