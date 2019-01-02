@@ -1,55 +1,28 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { PropertyRepository } from './property-repository.service';
+import {PropertiesDs} from "./properties.ds";
+import {MediaChange, MediaObserver} from "@angular/flex-layout";
+import {distinctUntilChanged, map, tap} from "rxjs/operators";
 
-import {tap} from 'rxjs/operators';
+
+const SMALL_RESOLUTIONS = ['xs', 'sm'];
 
 @Component({
   selector: 'sah-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-  loading: boolean = false;
+export class AppComponent implements OnInit {
+  isHandset$ = this.mediaObserver.media$.pipe(
+    map((change: MediaChange) => change.mqAlias),
+    distinctUntilChanged(),
+    map((change: string) => SMALL_RESOLUTIONS.includes(change))
+  );
 
-  page:number = 0;
-  total: number = 0;
-  sortBy: string = "id";
-  direction: string = "asc";
-  data$: any;
-
-  constructor(private repository: PropertyRepository) {}
+  constructor(private ds: PropertiesDs, private mediaObserver: MediaObserver) {
+  }
 
   ngOnInit() {
-    this.get();
-  }
-
-  pageChanged({pageIndex}) {
-    this.page = pageIndex;
-    this.get();
-  }
-
-  get() {
-    this.loading = true;
-    this.data$ = this.repository.getProperties(this.page, this.sortBy, this.direction).pipe(
-      tap((response) => {
-        this.total = response['numberOfElements'];
-      }),
-      tap(() => {
-        this.loading = false;
-      })
-    );
-  }
-
-  sort({ active, direction }) {
-    if (!active || direction === '') {
-      this.sortBy = 'id';
-      this.direction = 'asc';
-    } else {
-      this.sortBy = active;
-      this.direction = direction;
-    }
-
-    this.get();
   }
 }
+
