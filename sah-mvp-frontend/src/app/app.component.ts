@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     map((isHandset: boolean) => isHandset ? DRAWER_MODE_OVER : DRAWER_MODE_SIDE),
   );
 
-  constructor(private ds: PropertiesDs, private mediaObserver: MediaObserver, private bottomSheet: MatBottomSheet) {
+  constructor(public ds: PropertiesDs, private mediaObserver: MediaObserver, private bottomSheet: MatBottomSheet) {
   }
 
   ngOnInit() {

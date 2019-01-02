@@ -11,10 +11,10 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 export class ListComponent implements OnChanges {
 
   @Input()
-  private ds: PropertiesDs;
+  ds: PropertiesDs;
 
   @Input()
-  private filter: Filter;
+  filter: Filter;
 
   @ViewChild(CdkScrollable)
   scrollable: CdkScrollable;
