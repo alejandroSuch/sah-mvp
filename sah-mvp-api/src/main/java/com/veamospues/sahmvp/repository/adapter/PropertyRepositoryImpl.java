@@ -15,9 +15,7 @@ public class PropertyRepositoryImpl implements PropertyRepository {
 
   @Override
   public void save(Property property) {
-    if (!springDataPropertyRepository.findById(property.getId()).isPresent()) {
-      springDataPropertyRepository.save(property);
-    }
+    springDataPropertyRepository.save(property);
   }
 
   @Override
