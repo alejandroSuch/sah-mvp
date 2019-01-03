@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  sah-mvp-api:
+    image: alexsuch/sah-mvp-api
+    build:
+      context: ./
+      dockerfile: ./Dockerfile

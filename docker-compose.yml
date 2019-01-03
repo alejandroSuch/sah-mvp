@@ -1,22 +1,16 @@
 version: '3'
 services:
   sah-mvp-api:
-    build:
-      context: ./sah-mvp-api
-      dockerfile: ./Dockerfile
+    image: alexsuch/sah-mvp-api:$VERSION
     container_name: sah_mvp_api
     environment:
       - SPRING_PROFILES_ACTIVE=production
       - SPRING_JPA_SHOW_SQL=false
   sah-mvp-frontend:
-    build:
-      context: ./sah-mvp-frontend
-      dockerfile: ./Dockerfile
+    image: alexsuch/sah-mvp-frontend:$VERSION
     container_name: sah_mvp_frontend
   proxy:
-    build:
-      context: ./proxy
-      dockerfile: ./Dockerfile
+    image: alexsuch/sah-mvp-proxy:$VERSION
     container_name: sah_mvp_proxy
     ports:
       - "80:80"
@@ -24,9 +18,7 @@ services:
       - sah-mvp-api
       - sah-mvp-frontend
   sah-mvp-initializer:
-    build:
-      context: ./sah-mvp-initializer
-      dockerfile: ./Dockerfile
+    image: alexsuch/sah-mvp-initializer:$VERSION
     container_name: sah_mvp_initializer
     environment:
       - API_URL=http://sah-mvp-api:8081/properties
