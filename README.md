@@ -15,7 +15,7 @@ In order to run, you must have Docker and `docker-compose` command. You also nee
 Launch this command inside `sah-mvp` directory:
 
 ```
-sh run.sh 1.1.3
+sh run.sh 1.1.4
 ```
 
 And then navigate to http://localhost.

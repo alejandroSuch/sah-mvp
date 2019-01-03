@@ -1,0 +1,13 @@
+mat-list {
+  width: 100%;
+  overflow: scroll;
+  padding-top: 0;
+
+  mat-list-item {
+    border-bottom: 1px solid rgba(0,0,0,.12);
+
+    p.city {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+}
